@@ -326,3 +326,11 @@ declare interface getBankProps {
 declare interface getBankByAccountIdProps {
   accountId: string;
 }
+
+declare interface CustomInputProp {
+  control: Control<z.infer<typeof formSchema>>;
+  label: string;
+  placeholder: string;
+  name: FieldPath<z.infer<typeof formSchema>>;
+  type: string;
+}
