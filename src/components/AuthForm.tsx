@@ -59,7 +59,6 @@ const AuthForm = ({ type }: { type: string }) => {
     } finally {
       setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (

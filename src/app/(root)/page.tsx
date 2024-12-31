@@ -1,15 +1,11 @@
 import HeaderBox from "@/components/HeaderBox";
 import RightSidebar from "@/components/RightSidebar";
 import TotalBalanceBox from "@/components/TotalBalanceBox";
-import { Lasso } from "lucide-react";
+import { getLoggedInUser } from "@/lib/actions/user.actions";
 import React from "react";
 
-export default function page() {
-  const loggedIn = {
-    firstName: "Hadaro",
-    lastName: "Adams",
-    email: "hadaroadams1234@gmail.com",
-  };
+export default async function page() {
+  const loggedIn = await getLoggedInUser();
   return (
     <section className="home">
       <div className="home-content">
@@ -17,7 +13,7 @@ export default function page() {
           <HeaderBox
             type="greeting"
             title="Welcome"
-            user={loggedIn.firstName || "Guest"}
+            user={loggedIn?.name || "Guest"}
             subtext="Access and manage your account and transaction efficiently"
           />
           <TotalBalanceBox
