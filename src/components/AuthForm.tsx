@@ -22,6 +22,7 @@ import { Loader2 } from "lucide-react";
 import SignUp from "@/app/(auth)/sign-up/page";
 import { useRouter } from "next/navigation";
 import { signIn, signUp } from "@/lib/actions/user.actions";
+import PlaidLink from "./PlaidLink";
 
 const AuthForm = ({ type }: { type: string }) => {
   const [user, setUser] = useState();
@@ -44,7 +45,19 @@ const AuthForm = ({ type }: { type: string }) => {
     try {
       //sign up with Appwrite & create plaid token
       if (type === "sign-up") {
-        const newUser = await signUp(values);
+        const userData = {
+          firstName: values.firstName!,
+          lastName: values.lastName!,
+          address1: values.address1!,
+          city: values.city!,
+          state: values.state!,
+          postalCode: values.postalCode!,
+          dateOfBirth: values.dateOfBirth!,
+          ssn: values.ssn!,
+          email: values.email!,
+          password: values.password!,
+        };
+        const newUser = await signUp(userData);
         setUser(newUser);
       }
       if (type === "sign-in") {
@@ -86,8 +99,13 @@ const AuthForm = ({ type }: { type: string }) => {
           </h1>
         </div>
       </header>
+
       {user ? (
-        <div className="flex flex-col gap-4"></div>
+        <>
+          <div className="flex flex-col gap-4">
+            <PlaidLink user={user} variant="primary" />
+          </div>
+        </>
       ) : (
         <>
           <Form {...form}>
@@ -133,7 +151,7 @@ const AuthForm = ({ type }: { type: string }) => {
                       type=""
                     />
                     <CustomInput
-                      name="postCode"
+                      name="postalCode"
                       label={"Post Code"}
                       control={form.control}
                       placeholder={"ex:11101"}
