@@ -24,6 +24,7 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
         publicToken: public_token,
         user,
       });
+      router.push("/");
     },
     [user]
   );
@@ -32,6 +33,7 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
     onSuccess,
   };
   const { open, ready } = usePlaidLink(config);
+  console.log(ready);
   return (
     <>
       {variant === "primary" ? (
