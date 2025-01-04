@@ -13,6 +13,7 @@ import {
 import { plaidClient } from "../plaid";
 import { addFundingSource, createDwollaCustomer } from "./dwolla.action";
 import { revalidatePath } from "next/cache";
+import { error } from "console";
 
 const {
   APPWRITE_DATABASE_ID: DATABASE_ID,
@@ -30,7 +31,7 @@ export const getUserInfo = async ({ userId }: getUserInfoProps) => {
     );
     return parseStringify(user.documents[0]);
   } catch (error) {
-    console.error("An error occurred while getting the bank:", error);
+    console.error("An error occurred while getting the user:", error);
   }
 };
 
@@ -164,15 +165,29 @@ export const createBankAccount = async ({
 }: createBankAccountProps) => {
   try {
     const { database } = await createAdminClient();
+    const bankInfo = {
+      accessToken,
+      accountId,
+      bankId,
+      fundingSourceUrl,
+      sharableId,
+      userId,
+    };
+    console.log("bank");
+
+    // console.log(bankInfo);
 
     const bankAccount = await database.createDocument(
       DATABASE_ID!,
       BANK_COLLECTION_ID!,
       ID.unique(),
-      { accessToken, accountId, bankId, fundingSourceUrl, sharableId, userId }
+      bankInfo
     );
+
     return parseStringify(bankAccount);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const exchangePublicToken = async ({
@@ -248,6 +263,7 @@ export const getBanks = async ({ userId }: getBanksProps) => {
       BANK_COLLECTION_ID!,
       [Query.equal("userId", [userId])]
     );
+    // console.log(userId)
     return parseStringify(banks.documents);
   } catch (error) {
     console.error("An error occurred while getting the banks:", error);

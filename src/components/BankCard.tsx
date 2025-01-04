@@ -9,6 +9,7 @@ const BankCard = ({
   userName,
   showBalance = true,
 }: CreditCardProps) => {
+
   return (
     <div className="flex">
       <Link href={"/"} className="bank-card">
@@ -25,7 +26,8 @@ const BankCard = ({
               <h2 className="text-12 font-semibold text-white">●● / ●●</h2>
             </div>
             <p className="text-12 font-semibold tracking-[1.1px] text-white text-nowrap">
-              ●●●● ●●●● ●●●●<span className="text-14 ml-2">GHC{1234}</span>
+              ●●●● ●●●● ●●●●
+              <span className="text-14 ml-2">GHC{account.currentBalance}</span>
             </p>
           </article>
         </div>
