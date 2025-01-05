@@ -143,15 +143,20 @@ export const createLinkToken = async (user: User) => {
         client_user_id: user.$id,
       },
       client_name: `${user.firstName} ${user.lastName}`,
-      products: ["auth"] as Products[],
+      products: ["auth", "transactions"] as Products[],
       language: "en",
       country_codes: ["US"] as CountryCode[],
     };
 
     const response = await plaidClient.linkTokenCreate(tokenParams);
     return parseStringify({ linkToken: response.data.link_token });
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    // Log full error details
+    console.error(
+      "An error occurred while syncing transactions:",
+      error.response?.data || error.message
+    );
+    throw error; // Optionally rethrow the error if needed
   }
 };
 

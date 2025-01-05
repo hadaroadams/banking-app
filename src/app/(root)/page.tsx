@@ -18,7 +18,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
   const appwriteItemId = (id as string) || accountData[0]?.appwriteItemId;
 
   const account = await getAccount({ appwriteItemId });
-  console.log(account);
+  // console.log(account);
   return (
     <section className="home">
       <div className="home-content">
@@ -35,12 +35,12 @@ export default async function Home({ searchParams }: SearchParamProps) {
             totalCurrentBalance={accounts?.totalCurrentBalance}
           />
         </header>
-        {/* <RecentTransactions
+        <RecentTransactions
           accounts={accountData}
           transactions={account?.transactions}
           appwriteItemId={appwriteItemId}
           page={currentPage}
-        /> */}
+        />
       </div>
       <RightSidebar
         user={loggedIn}

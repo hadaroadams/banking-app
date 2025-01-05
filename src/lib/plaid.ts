@@ -1,4 +1,4 @@
-import { headers } from "next/headers";
+
 import { Configuration, PlaidApi, PlaidEnvironments } from "plaid";
 
 const configuration = new Configuration({
