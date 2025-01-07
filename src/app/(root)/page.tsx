@@ -11,7 +11,7 @@ export default async function Home({ searchParams }: SearchParamProps) {
   const currentPage = Number(page as string) || 1;
   const loggedIn = await getLoggedInUser();
   const accounts = await getAccounts({ userId: loggedIn?.$id });
-  // console.log(loggedIn?.$id);
+  console.log(loggedIn?.$id);
 
   if (!accounts) return;
 
