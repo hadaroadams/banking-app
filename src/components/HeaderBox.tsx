@@ -1,6 +1,5 @@
-import { Span } from "next/dist/trace";
 import React from "react";
-AggregateError;
+
 const HeaderBox = ({
   type = "title",
   subtext,

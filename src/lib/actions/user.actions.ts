@@ -13,7 +13,6 @@ import {
 import { plaidClient } from "../plaid";
 import { addFundingSource, createDwollaCustomer } from "./dwolla.action";
 import { revalidatePath } from "next/cache";
-import { error } from "console";
 
 const {
   APPWRITE_DATABASE_ID: DATABASE_ID,
@@ -122,6 +121,7 @@ export async function getLoggedInUser() {
     const user = await getUserInfo({ userId: result.$id });
     return parseStringify(user);
   } catch (error) {
+    console.log(error);
     return null;
   }
 }
@@ -131,7 +131,8 @@ export const logoutAccount = async () => {
     const { account } = await createSessionClient();
     (await cookies()).delete("appwrite-sesssion");
     await account.deleteSession("current");
-  } catch (errro) {
+  } catch (error) {
+    console.log(error);
     return null;
   }
 };
@@ -150,12 +151,9 @@ export const createLinkToken = async (user: User) => {
 
     const response = await plaidClient.linkTokenCreate(tokenParams);
     return parseStringify({ linkToken: response.data.link_token });
-  } catch (error: any) {
+  } catch (error) {
     // Log full error details
-    console.error(
-      "An error occurred while syncing transactions:",
-      error.response?.data || error.message
-    );
+    console.error("An error occurred while syncing transactions:", error);
     throw error; // Optionally rethrow the error if needed
   }
 };

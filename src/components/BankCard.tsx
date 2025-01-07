@@ -1,7 +1,6 @@
 import { formatAmount } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { format } from "path";
 import React from "react";
 import Copy from "./Copy";
 
@@ -10,7 +9,6 @@ const BankCard = ({
   userName,
   showBalance = true,
 }: CreditCardProps) => {
-  console.log();
   return (
     <div className="flex flex-col">
       <Link

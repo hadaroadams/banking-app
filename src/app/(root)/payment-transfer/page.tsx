@@ -6,7 +6,8 @@ import React from "react";
 
 const PaymentTransfer = async () => {
   const loggedIn = await getLoggedInUser();
-  const accounts = await getAccounts({ userId: loggedIn.$id });
+  const accounts = await getAccounts({ userId: loggedIn?.$id });
+  // console.log(loggedIn.$id);
 
   if (!accounts) return;
 
@@ -17,7 +18,7 @@ const PaymentTransfer = async () => {
         subtext="Please provide any specific details or notes related to the payment transfer"
       />
       <section className="size-full pt-5">
-        <PaymentTransferForm accounts={accounts}  />
+        <PaymentTransferForm accounts={accounts} />
       </section>
     </section>
   );

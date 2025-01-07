@@ -2,13 +2,10 @@
 
 import { ID, Query } from "node-appwrite";
 import { createAdminClient } from "../server/appwrite";
-import { channel } from "diagnostics_channel";
 import { parseStringify } from "../utils";
 
 const {
   APPWRITE_DATABASE_ID: DATABASE_ID,
-  APPWRITE_USER_COLLECTION_ID: USER_COLLECTION_ID,
-  APPWRITE_BANK_COLLECTION_ID: BANK_COLLECTION_ID,
   APPWRITE_TRANSACTION_COLLECTION_ID: TRANSCATION_COLLECTION_ID,
 } = process.env;
 
